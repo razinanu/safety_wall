@@ -15,11 +15,20 @@ import os
 robot = FakeRobot()
 kuka = KukaLWR()
 
+lsRobot = ATRV()
+lsRobot.translate(2,2,0)
+laserscanner = Hokuyo()
+laserscanner.translate(0.6, 0, 0.2)
+laserscanner.rotate(0,0, -1.5)
+lsRobot.append(laserscanner)
+laserscanner.add_interface('ros')
+
 # The list of the main methods to manipulate your components
 # is here: http://www.openrobots.org/morse/doc/stable/user/builder_overview.html
 # robot.translate(1.0, 0.0, 0.0)
 # robot.rotate(0.0, 0.0, 3.5)
 
+#kuka.rotate("kuka_2", 1.5, 0.5)
 kuka.translate(0, 0, 1.8)
 
 # Add a motion controller
@@ -31,11 +40,11 @@ kuka.translate(0, 0, 1.8)
 motion = MotionVW()
 robot.append(motion)
 
-kuka.add_service('ros')
+kuka.add_interface('ros')
 
 # Add a keyboard controller to move the robot with arrow keys.
 keyboard = Keyboard()
-robot.append(keyboard)
+lsRobot.append(keyboard)
 keyboard.properties(ControlType = 'Position')
 
 # Add a pose sensor that exports the current location and orientation
