@@ -1,10 +1,10 @@
 function drawRect(width, height,height_down)
     m1=simGetObjectMatrix(sensorRefHandle,-1)
 
-    p0 = {0,-height,0}
+    p0 = {-height_down,-height,0}
     p1 = {width,-height,0}
     p2 = {width,height,0}
-    p3 = {0,height,0}
+    p3 = {-height_down,height,0}
 
     p0 = simMultiplyVector(m1,p0)
     p1 = simMultiplyVector(m1,p1)
@@ -51,7 +51,7 @@ function processPoints(measuredData)
 
 	--else print("good 1")
 	    end
-    print(obstacle)
+    --print(obstacle)
     end
 
 end
@@ -61,8 +61,8 @@ function isPointInRect(point)
       --- X point[1] is height, Y point[2] is width
      --print("pointX0: " .. point[1])
     -- print("pointY0: " .. point[2])
-    inXRange = (point[1] > -RECT_HEIGHT_DOWN   and point[1] <  RECT_HEIGHT)
-    inYRange = (point[2] > -RECT_WIDTH and point[2] < RECT_WIDTH)
+    inXRange = (point[1] > -RECT_HEIGHT_DOWN   and point[1] <  RECT_WIDTH )
+    inYRange = (point[2] > -RECT_HEIGHT and point[2] < RECT_HEIGHT)
 
     if(inXRange and inYRange) then
 	return true
