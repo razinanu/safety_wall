@@ -5,8 +5,8 @@ if (sim_call_type==sim_childscriptcall_initialization) then
     require("laserscannerFunctions")
     
     -- symmetric size of safety wall
-    RECT_HEIGHT = 0.765
-    RECT_HEIGHT_DOWN = 0.07
+    RECT_HEIGHT = 0.563
+    RECT_HEIGHT_DOWN = 0.0048
     RECT_WIDTH = 0.71
 
     visionSensor1Handle=simGetObjectHandle("SICK_S300_sensor1")
