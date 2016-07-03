@@ -150,10 +150,10 @@ function drawRect(width, height,height_down)
     --m02=simMultiplyMatrices(m02,m2)
     --P0 = (height_down, -width, 0)
 
-    p0 = {-height_down,-width,0}
+    p0 = {height_down,-width,0}
     p1 = {height,-width,0}
     p2 = {height,width,0}
-    p3 = {-height_down,width,0}
+    p3 = {height_down,width,0}
 
     p0 = simMultiplyVector(m1,p0)
     p1 = simMultiplyVector(m1,p1)
@@ -206,14 +206,14 @@ function processPoints(measuredData)
 end
 
 function isPointInRect(point)
-    RECT_HEIGHT = 2
-    RECT_HEIGHT_DOWN = 0.07
+    RECT_HEIGHT = 1.15
+    RECT_HEIGHT_DOWN = 0.104
     RECT_WIDTH = 0.60
     drawRect(RECT_WIDTH,RECT_HEIGHT,RECT_HEIGHT_DOWN)
       --- X point[1] is height, Y point[2] is width
      --print("pointX0: " .. point[1])  
     -- print("pointY0: " .. point[2])   
-    inXRange = (point[1] > -RECT_HEIGHT_DOWN   and point[1] <  RECT_HEIGHT)
+    inXRange = (point[1] > RECT_HEIGHT_DOWN   and point[1] <  RECT_HEIGHT)
     inYRange = (point[2] > -RECT_WIDTH and point[2] < RECT_WIDTH)
 
     if(inXRange and inYRange) then
