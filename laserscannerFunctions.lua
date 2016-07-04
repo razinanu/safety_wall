@@ -1,10 +1,32 @@
+function addVector(v1,v2)
+    vecSize = table.getn(v1)
+    v = {}
+    if vecSize ~= table.getn(v2) then
+	print("tried to add vectors with different sizes")
+    else
+	for i=1,vecSize do
+	    v[i] = v1[i] + v2[i]
+	end
+    end
+    return v
+end
+
 function drawRect(width, height,height_down)
+
+    SENSOR_HEIGTH_OFFSET = 0.08
     m1=simGetObjectMatrix(sensorRefHandle,-1)
 
-    p0 = {-height_down,-height,0}
-    p1 = {width,-height,0}
-    p2 = {width,height,0}
-    p3 = {-height_down,height,0}
+    p0 = {-height_down,-width,0}
+    p1 = {height,-width,0}
+    p2 = {height,width,0}
+    p3 = {-height_down,width,0}
+
+    sensorOffsetVector = {0,0,0.116}
+
+    p0 = addVector(p0, sensorOffsetVector)
+    p1 = addVector(p1, sensorOffsetVector)
+    p2 = addVector(p2, sensorOffsetVector)
+    p3 = addVector(p3, sensorOffsetVector)
 
     p0 = simMultiplyVector(m1,p0)
     p1 = simMultiplyVector(m1,p1)
@@ -61,8 +83,8 @@ function isPointInRect(point)
       --- X point[1] is height, Y point[2] is width
      --print("pointX0: " .. point[1])
     -- print("pointY0: " .. point[2])
-    inXRange = (point[1] > -RECT_HEIGHT_DOWN   and point[1] <  RECT_WIDTH )
-    inYRange = (point[2] > -RECT_HEIGHT and point[2] < RECT_HEIGHT)
+    inXRange = (point[1] > -RECT_HEIGHT_DOWN and point[1] <  RECT_HEIGHT)
+    inYRange = (point[2] > -RECT_WIDTH and point[2] < RECT_WIDTH)
 
     if(inXRange and inYRange) then
 	return true
