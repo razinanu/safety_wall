@@ -50,10 +50,10 @@ function processPoints(measuredData)
 
 
 	--else print("good 1")
-	    end
+	end
     --print(obstacle)
     end
-
+    return obstacle
 end
 
 function isPointInRect(point)
